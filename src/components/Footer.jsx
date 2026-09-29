@@ -1,8 +1,8 @@
 import { PORTFOLIO_INFO } from '../data/portfolioData';
-import { ArrowUp, Box } from 'lucide-react';
-import { FaArtstation, FaBehance, FaInstagram, FaDiscord, FaYoutube, FaLinkedin } from 'react-icons/fa';
+import { ArrowUp, Box, Download } from 'lucide-react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
-function Footer({ onOpenShowreel }) {
+function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -18,106 +18,74 @@ function Footer({ onOpenShowreel }) {
               </div>
               <div className="footerLogoTexts">
                 <span className="footerBrandName">{PORTFOLIO_INFO.name}</span>
-                <span className="footerBrandTitle">3D CGI & ANIMATION</span>
+                <span className="footerBrandTitle">FULL STACK DEVELOPER</span>
               </div>
             </a>
             <p className="footerTagline">
-              Engineering high-fidelity 3D assets, cinematic environments, and emotive character performances with real-time and offline raytracing pipelines.
+              Motivated Full Stack Developer specialized in React.js, Python Flask, PHP Laravel, and MySQL. Engineering scalable architectures and clean REST APIs.
             </p>
             <div className="footerPipelineBadge">
               <span className="pipelineDot"></span>
-              <span>Render Engines: Unreal Engine 5 • Cycles • Octane</span>
+              <span>Stack: React.js • Flask • Laravel • MySQL</span>
             </div>
           </div>
 
           <div className="footerNavCol">
-            <h4 className="footerColTitle">Exploration</h4>
+            <h4 className="footerColTitle">Navigation</h4>
             <ul className="footerLinksList">
               <li>
-                <a href="#projects">All 3D Projects</a>
+                <a href="#about">About Me</a>
               </li>
               <li>
-                <button onClick={onOpenShowreel} className="footerTextBtn">
-                  2026 Showreel
-                </button>
+                <a href="#skills">Technical Skills</a>
               </li>
               <li>
-                <a href="#about">Artist Profile & Pipeline</a>
+                <a href="#experience">Internship Experience</a>
               </li>
               <li>
-                <a href="#hardware">Studio Hardware Specs</a>
+                <a href="#projects">Recent Projects</a>
               </li>
               <li>
-                <a href="#resources">Free 3D Asset Packs</a>
+                <a href="#contact">Contact & Hire</a>
               </li>
               <li>
-                <a href="#contact">Commission Inquiries</a>
+                <a href={PORTFOLIO_INFO.resumeUrl} download>
+                  Download Resume
+                </a>
               </li>
             </ul>
           </div>
 
           <div className="footerSocialCol">
-            <h4 className="footerColTitle">Industry Networks</h4>
+            <h4 className="footerColTitle">Connect</h4>
             <div className="footerSocialIcons">
               <a
-                href={PORTFOLIO_INFO.socials.artstation}
+                href={PORTFOLIO_INFO.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="ArtStation"
+                aria-label="GitHub profile"
               >
-                <FaArtstation size={18} />
-              </a>
-              <a
-                href={PORTFOLIO_INFO.socials.behance}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Behance"
-              >
-                <FaBehance size={18} />
-              </a>
-              <a
-                href={PORTFOLIO_INFO.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                <FaInstagram size={18} />
-              </a>
-              <a
-                href={PORTFOLIO_INFO.socials.discord}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Discord"
-              >
-                <FaDiscord size={18} />
-              </a>
-              <a
-                href={PORTFOLIO_INFO.socials.youtube}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="YouTube"
-              >
-                <FaYoutube size={18} />
+                <FaGithub size={18} />
               </a>
               <a
                 href={PORTFOLIO_INFO.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="LinkedIn"
+                aria-label="LinkedIn profile"
               >
                 <FaLinkedin size={18} />
               </a>
             </div>
             <div className="footerStatusNotice">
-              <span>Commission Status: </span>
-              <strong>{PORTFOLIO_INFO.commissionStatus}</strong>
+              <span>Status: </span>
+              <strong>{PORTFOLIO_INFO.statusBadge}</strong>
             </div>
           </div>
         </div>
 
         <div className="footerBottomBar">
           <p className="copyrightText">
-            © {new Date().getFullYear()} {PORTFOLIO_INFO.name}. All 3D models, textures, animations and renders are copyrighted and property of their respective clients & creators.
+            © {new Date().getFullYear()} {PORTFOLIO_INFO.name}. Designed & Developed with React.js & Vite.
           </p>
           <button
             onClick={scrollToTop}

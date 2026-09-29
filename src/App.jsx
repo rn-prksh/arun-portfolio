@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Projects from './components/Projects';
 import About from './components/About';
-import Resources from './components/Resources';
+import Skills from './components/Skills';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ShowreelModal from './components/ShowreelModal';
 import ProjectModal from './components/ProjectModal';
-import { PROJECTS_DATA } from './data/portfolioData';
 import { ArrowUp } from 'lucide-react';
 
 function App() {
-  const [showreelOpen, setShowreelOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -44,7 +42,7 @@ function App() {
 
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
-      threshold: 0.12,
+      threshold: 0.1,
       rootMargin: '0px 0px -40px 0px'
     });
 
@@ -54,22 +52,13 @@ function App() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSelectProjectByTitle = (title) => {
-    const found = PROJECTS_DATA.find(
-      (p) => p.title.toLowerCase().includes(title.toLowerCase()) || title.toLowerCase().includes(p.title.toLowerCase())
-    );
-    if (found) {
-      setShowreelOpen(false);
-      setSelectedProject(found);
-    }
-  };
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="portfolioApp">
+      {/* Luminous Top Scroll Progress Bar */}
       <div
         className="topScrollProgressBar"
         style={{ width: `${scrollProgress}%` }}
@@ -80,30 +69,27 @@ function App() {
         Skip to main content
       </a>
 
-      <Navbar onOpenShowreel={() => setShowreelOpen(true)} />
+      <Navbar />
 
       <main id="main">
-        <Hero onOpenShowreel={() => setShowreelOpen(true)} />
-        <Projects onSelectProject={(project) => setSelectedProject(project)} />
+        <Hero />
         <About />
-        <Resources />
+        <Skills />
+        <Experience />
+        <Projects onSelectProject={(project) => setSelectedProject(project)} />
         <Contact />
       </main>
 
-      <Footer onOpenShowreel={() => setShowreelOpen(true)} />
+      <Footer />
 
-      <ShowreelModal
-        isOpen={showreelOpen}
-        onClose={() => setShowreelOpen(false)}
-        onSelectProject={handleSelectProjectByTitle}
-      />
-
+      {/* Interactive Project Architecture Modal */}
       <ProjectModal
         isOpen={Boolean(selectedProject)}
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
       />
 
+      {/* Floating Back to Top Button */}
       <button
         onClick={scrollToTop}
         className={`floatingScrollBtn ${showScrollTop ? 'visible' : ''}`}

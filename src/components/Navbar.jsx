@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Play, Sparkles, Menu, X, Box } from 'lucide-react';
+import { Download, Menu, X, Box, ArrowRight } from 'lucide-react';
 import { PORTFOLIO_INFO } from '../data/portfolioData';
 
-function Navbar({ onOpenShowreel }) {
+function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -11,7 +11,7 @@ function Navbar({ onOpenShowreel }) {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ['home', 'projects', 'about', 'hardware', 'resources', 'contact'];
+      const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -36,75 +36,65 @@ function Navbar({ onOpenShowreel }) {
   return (
     <header className={`navbarHeader ${scrolled ? 'scrolled' : ''}`}>
       <div className="navContainer">
-        <a href="#home" className="navLogo" onClick={closeMenu} aria-label="Arun Prakash V 3D Portfolio">
+        {/* Brand Logo */}
+        <a href="#home" className="navLogo" onClick={closeMenu} aria-label="Arun Prakash V Portfolio Home">
           <div className="logoCubeIcon">
             <Box size={20} aria-hidden="true" />
           </div>
           <div className="logoTextGroup">
             <span className="logoName">{PORTFOLIO_INFO.name}</span>
-            <span className="logoRole">3D & CGI ARTIST</span>
+            <span className="logoRole">FULL STACK DEVELOPER</span>
           </div>
         </a>
 
-        <div className="commissionBeacon" title={PORTFOLIO_INFO.commissionStatus}>
+        {/* Live Availability Beacon */}
+        <div className="commissionBeacon" title={PORTFOLIO_INFO.statusBadge}>
           <span className="beaconDot" aria-hidden="true"></span>
-          <span className="beaconText">Commissions Open</span>
+          <span className="beaconText">Available for Hire</span>
         </div>
 
+        {/* Desktop Navigation */}
         <nav className="desktopNav" aria-label="Main Navigation">
           <ul className="navLinks">
             <li>
-              <a
-                href="#projects"
-                className={activeSection === 'projects' ? 'active' : ''}
-              >
-                Work
-              </a>
-            </li>
-            <li>
-              <a
-                href="#about"
-                className={activeSection === 'about' ? 'active' : ''}
-              >
+              <a href="#about" className={activeSection === 'about' ? 'active' : ''}>
                 About
               </a>
             </li>
             <li>
-              <a
-                href="#hardware"
-                className={activeSection === 'hardware' ? 'active' : ''}
-              >
-                Hardware Specs
+              <a href="#skills" className={activeSection === 'skills' ? 'active' : ''}>
+                Skills
               </a>
             </li>
             <li>
-              <a
-                href="#resources"
-                className={activeSection === 'resources' ? 'active' : ''}
-              >
-                Free Assets
+              <a href="#experience" className={activeSection === 'experience' ? 'active' : ''}>
+                Experience
               </a>
             </li>
             <li>
-              <a
-                href="#contact"
-                className={activeSection === 'contact' ? 'active' : ''}
-              >
+              <a href="#projects" className={activeSection === 'projects' ? 'active' : ''}>
+                Projects
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className={activeSection === 'contact' ? 'active' : ''}>
                 Contact
               </a>
             </li>
           </ul>
 
-          <button
-            onClick={onOpenShowreel}
-            className="navReelBtn"
-            title="Watch 2026 3D Showreel"
+          <a
+            href={PORTFOLIO_INFO.resumeUrl}
+            className="navResumeBtn"
+            download
+            aria-label="Download Arun Prakash V Resume in PDF format"
           >
-            <Play size={14} fill="currentColor" aria-hidden="true" />
-            <span>Showreel</span>
-          </button>
+            <Download size={14} aria-hidden="true" />
+            <span>Resume</span>
+          </a>
         </nav>
 
+        {/* Mobile Toggle Button */}
         <button
           className="mobileToggleBtn"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -115,49 +105,37 @@ function Navbar({ onOpenShowreel }) {
         </button>
       </div>
 
+      {/* Mobile Drawer */}
       <div className={`mobileDrawer ${mobileMenuOpen ? 'open' : ''}`}>
         <ul className="mobileNavLinks">
           <li>
-            <a href="#home" onClick={closeMenu}>
-              Home
-            </a>
+            <a href="#home" onClick={closeMenu}>Home</a>
           </li>
           <li>
-            <a href="#projects" onClick={closeMenu}>
-              Featured Work
-            </a>
+            <a href="#about" onClick={closeMenu}>About Me</a>
           </li>
           <li>
-            <a href="#about" onClick={closeMenu}>
-              About & Pipeline
-            </a>
+            <a href="#skills" onClick={closeMenu}>Skills & Stack</a>
           </li>
           <li>
-            <a href="#hardware" onClick={closeMenu}>
-              Hardware Specs
-            </a>
+            <a href="#experience" onClick={closeMenu}>Experience</a>
           </li>
           <li>
-            <a href="#resources" onClick={closeMenu}>
-              Free 3D Assets & Tutorials
-            </a>
+            <a href="#projects" onClick={closeMenu}>Featured Projects</a>
           </li>
           <li>
-            <a href="#contact" onClick={closeMenu}>
-              Commission Inquiry
-            </a>
+            <a href="#contact" onClick={closeMenu}>Contact & Hire</a>
           </li>
           <li className="mobileReelItem">
-            <button
-              onClick={() => {
-                closeMenu();
-                onOpenShowreel();
-              }}
+            <a
+              href={PORTFOLIO_INFO.resumeUrl}
+              download
+              onClick={closeMenu}
               className="btn primary fullWidth"
             >
-              <Play size={16} fill="currentColor" />
-              <span>Watch 2026 Showreel</span>
-            </button>
+              <Download size={16} aria-hidden="true" />
+              <span>Download Resume PDF</span>
+            </a>
           </li>
         </ul>
       </div>
