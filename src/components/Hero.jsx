@@ -1,64 +1,70 @@
 import { useState } from 'react';
+import { Download, ArrowRight, Mail, Check, Sparkles, ChevronDown, Briefcase } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Download, ArrowRight, Mail, Check } from 'lucide-react';
+import Hero3DCanvas from './3d/Hero3DCanvas';
+import { PORTFOLIO_INFO } from '../data/portfolioData';
 
 function Hero() {
   const [copied, setCopied] = useState(false);
-  const email = 'rnprkshv@gmail.com';
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email).then(() => {
+    navigator.clipboard.writeText(PORTFOLIO_INFO.email).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2200);
     });
   };
 
   return (
-    <section id="home" className="hero section" aria-label="Introduction">
-      <div className="heroContent">
-        <div className="badge">
-          <span className="badgePulse" aria-hidden="true"></span>
-          <span>Available for Full Stack Developer Roles</span>
+    <section id="home" className="heroSection" aria-label="Introduction">
+      {/* Interactive 3D WebGL Canvas Viewport */}
+      <Hero3DCanvas />
+
+      {/* Dark Gradient Vignette for Readability */}
+      <div className="heroVignette" aria-hidden="true"></div>
+
+      <div className="heroForeground">
+        {/* Availability / Current Role Badge */}
+        <div className="heroBadge">
+          <span className="pulseGreen" aria-hidden="true"></span>
+          <span>Web Developer @ WARX Digital Pvt Ltd • Building ERP, E-Commerce & AI Agents</span>
         </div>
 
-        <h1 className="heroTitle">
-          Hi, I am <span className="highlightText">Arun Prakash V</span>
+        <h1 className="heroNameTitle">
+          <span className="heroPretitle">HI, I AM</span>
+          <span className="heroMainName">{PORTFOLIO_INFO.name}</span>
+          <span className="heroRoleHighlight">{PORTFOLIO_INFO.title}</span>
         </h1>
-        <h2 className="heroSubtitle">Full Stack Developer</h2>
 
-        <p className="heroText">
-          Motivated Full Stack Developer with hands-on experience in <strong>React.js</strong>,{' '}
-          <strong>Flask</strong>, <strong>Laravel</strong>, and <strong>MySQL</strong>. Passionate
-          about engineering scalable web applications, architecting robust REST APIs, and solving
-          real-world business problems.
+        <p className="heroDescription">
+          {PORTFOLIO_INFO.bio}
         </p>
 
-        <div className="heroButtons">
+        {/* Action CTAs */}
+        <div className="heroCtaGroup">
           <a
-            href="/resume/Arun_Prakash_bsc_Resume.pdf"
-            className="btn primary"
+            href={PORTFOLIO_INFO.resumeUrl}
+            className="btn primary glowEffect"
             download
             aria-label="Download Arun Prakash V Resume in PDF format"
           >
             <Download size={18} aria-hidden="true" />
             <span>Download Resume</span>
           </a>
-          <a href="#projects" className="btn secondary">
-            <span>View Projects</span>
+
+          <a href="#experience" className="btn secondary">
+            <span>Work Experience</span>
             <ArrowRight size={18} aria-hidden="true" />
           </a>
-        </div>
 
-        <div className="heroActions">
-          <div className="quickEmail">
+          <div className="heroQuickEmail">
             <button
               onClick={handleCopyEmail}
               className="copyEmailBtn"
               title="Click to copy email address"
-              aria-label="Copy email address to clipboard"
+              aria-label="Copy email address"
             >
               <Mail size={16} aria-hidden="true" />
-              <span className="emailText">{email}</span>
+              <span className="emailText">{PORTFOLIO_INFO.email}</span>
               {copied ? (
                 <span className="copyFeedback success">
                   <Check size={14} aria-hidden="true" /> Copied!
@@ -68,45 +74,62 @@ function Hero() {
               )}
             </button>
           </div>
+        </div>
 
-          <div className="socials" aria-label="Social media profiles">
-            <a
-              href="https://github.com/rn-prksh"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Arun Prakash V on GitHub (opens in new tab)"
-            >
-              <FaGithub size={22} aria-hidden="true" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/arun-prakash-v"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Arun Prakash V on LinkedIn (opens in new tab)"
-            >
-              <FaLinkedin size={22} aria-hidden="true" />
-            </a>
+        {/* Social Networks Row */}
+        <div className="heroSocialsRow">
+          <a
+            href={PORTFOLIO_INFO.socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="heroSocialIconBtn"
+            aria-label="Arun Prakash V on GitHub"
+          >
+            <FaGithub size={20} />
+            <span>GitHub</span>
+          </a>
+          <a
+            href={PORTFOLIO_INFO.socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="heroSocialIconBtn"
+            aria-label="Arun Prakash V on LinkedIn"
+          >
+            <FaLinkedin size={20} />
+            <span>LinkedIn</span>
+          </a>
+        </div>
+
+        {/* Tech Stack Ticker */}
+        <div className="pipelineTicker" aria-label="Core Tech Stack">
+          <span className="tickerLabel">CORE STACK:</span>
+          <div className="tickerItems">
+            <span>CodeIgniter 3 (CI3)</span>
+            <span className="tickerDivider">•</span>
+            <span>React.js</span>
+            <span className="tickerDivider">•</span>
+            <span>AI Agents</span>
+            <span className="tickerDivider">•</span>
+            <span>Python Flask</span>
+            <span className="tickerDivider">•</span>
+            <span>PHP Laravel</span>
+            <span className="tickerDivider">•</span>
+            <span>MySQL</span>
+            <span className="tickerDivider">•</span>
+            <span>ERP Systems</span>
+            <span className="tickerDivider">•</span>
+            <span>E-Commerce</span>
+            <span className="tickerDivider">•</span>
+            <span>REST APIs</span>
           </div>
         </div>
       </div>
 
-      <div className="heroImageContainer">
-        <div className="heroImageGlow" aria-hidden="true"></div>
-        <div className="heroImageFrame">
-          <picture>
-            <source srcSet="/images/profile.webp" type="image/webp" />
-            <img
-              src="/images/profile.png"
-              alt="Arun Prakash V - Full Stack Developer"
-              width="290"
-              height="290"
-              fetchpriority="high"
-              decoding="async"
-              className="avatarImg"
-            />
-          </picture>
-        </div>
-      </div>
+      {/* Scroll Down Indicator */}
+      <a href="#about" className="heroScrollIndicator" aria-label="Scroll down to about section">
+        <span className="scrollText">SCROLL</span>
+        <ChevronDown size={18} className="scrollChevron" aria-hidden="true" />
+      </a>
     </section>
   );
 }

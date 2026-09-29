@@ -1,63 +1,42 @@
-import { Calendar, MapPin, Briefcase, CheckCircle2 } from 'lucide-react';
-
-const experiences = [
-  {
-    role: 'Software Intern – Python Flask Full Stack Developer',
-    company: 'DCE Technology',
-    location: 'Virudhunagar, India',
-    period: 'Jul 2025 – Mar 2026',
-    duration: '9 mos',
-    badge: 'Python / Flask Stack',
-    points: [
-      'Architected and developed full-stack web applications using Python, Flask framework, and MySQL database.',
-      'Designed and engineered scalable RESTful APIs connecting interactive React.js client interfaces to backend microservices.',
-      'Implemented robust JWT-based Authentication, role-based access control, relational database schema optimization, and security best practices.',
-    ],
-    tech: ['Python', 'Flask', 'React.js', 'MySQL', 'JWT', 'REST APIs', 'Postman'],
-  },
-  {
-    role: 'Software Intern – Full Stack Development (Laravel)',
-    company: 'DCE Technology',
-    location: 'Virudhunagar, India',
-    period: 'Sep 2024 – Apr 2025',
-    duration: '7 mos',
-    badge: 'Laravel / PHP Stack',
-    points: [
-      'Completed an intensive 7-month full stack software engineering internship focused on PHP and Laravel framework.',
-      'Developed and maintained modular web applications following clean MVC (Model-View-Controller) architecture standards.',
-      'Integrated relational MySQL databases, implemented secure session-based authentication, and created automated workflows.',
-    ],
-    tech: ['PHP', 'Laravel', 'MySQL', 'MVC Architecture', 'Blade', 'Git'],
-  },
-];
+import { EXPERIENCE_DATA } from '../data/portfolioData';
+import { Calendar, MapPin, Briefcase, CheckCircle2, Sparkles } from 'lucide-react';
 
 function Experience() {
   return (
-    <section id="experience" className="section" aria-label="Work Experience">
-      <div className="sectionTitle">
-        <p>Career Journey</p>
-        <h2>Internship Experience</h2>
+    <section id="experience" className="section experienceSection" aria-label="Work Experience">
+      <div className="sectionHeader">
+        <div className="sectionTag">
+          <Briefcase size={14} aria-hidden="true" />
+          <span>CAREER JOURNEY</span>
+        </div>
+        <h2 className="sectionTitle">Professional Experience</h2>
+        <p className="sectionSubtitle">
+          Currently working as a Web Developer at WARX Digital Pvt Ltd with a foundation of 1+ years of software engineering internships at DCE Technology.
+        </p>
       </div>
 
       <div className="timeline">
-        {experiences.map((exp) => (
-          <div className="timelineItem" key={exp.role}>
+        {EXPERIENCE_DATA.map((exp, idx) => (
+          <div className={`timelineItem revealOnScroll ${exp.isCurrent ? 'currentTimelineItem' : ''}`} key={exp.role}>
             <div className="timelineMarker" aria-hidden="true">
-              <div className="dot"></div>
+              <div className={`dot ${exp.isCurrent ? 'currentDot' : ''}`}></div>
               <div className="timelineLine"></div>
             </div>
 
-            <div className="timelineCard">
+            <div className={`timelineCard ${exp.isCurrent ? 'activeRoleCard' : ''}`}>
               <div className="timelineHeader">
                 <div>
                   <div className="timelineRoleWrap">
                     <h3>{exp.role}</h3>
-                    <span className="expBadge">{exp.badge}</span>
+                    <span className={`expBadge ${exp.isCurrent ? 'currentExpBadge' : ''}`}>
+                      {exp.isCurrent && <span className="pulseGreen" aria-hidden="true"></span>}
+                      {exp.badge}
+                    </span>
                   </div>
                   <div className="timelineMeta">
                     <span className="company">
                       <Briefcase size={14} aria-hidden="true" />
-                      {exp.company}
+                      <strong>{exp.company}</strong>
                     </span>
                     <span className="location">
                       <MapPin size={14} aria-hidden="true" />
@@ -66,7 +45,7 @@ function Experience() {
                   </div>
                 </div>
 
-                <div className="periodWrap">
+                <div className={`periodWrap ${exp.isCurrent ? 'currentPeriodWrap' : ''}`}>
                   <Calendar size={14} aria-hidden="true" />
                   <span>{exp.period}</span>
                   <span className="durationBadge">({exp.duration})</span>
@@ -84,7 +63,7 @@ function Experience() {
 
               <div className="expTechTags">
                 {exp.tech.map((t) => (
-                  <span key={t} className="techPill">
+                  <span key={t} className={`techPill ${exp.isCurrent ? 'currentTechPill' : ''}`}>
                     {t}
                   </span>
                 ))}

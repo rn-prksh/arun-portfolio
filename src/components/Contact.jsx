@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Copy, Check, Send } from 'lucide-react';
+import { PORTFOLIO_INFO } from '../data/portfolioData';
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Copy,
+  Check,
+  Send,
+  Download,
+  MessageSquare,
+  Sparkles
+} from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 function Contact() {
@@ -10,11 +21,8 @@ function Contact() {
     name: '',
     email: '',
     subject: '',
-    message: '',
+    message: ''
   });
-
-  const email = 'rnprkshv@gmail.com';
-  const phone = '+91 9597477183';
 
   const copyToClipboard = (text, type) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -36,178 +44,191 @@ function Contact() {
     const mailtoBody = encodeURIComponent(
       `Hi Arun,\n\n${formData.message}\n\nFrom: ${formData.name}\nEmail: ${formData.email}`
     );
-    window.location.href = `mailto:${email}?subject=${mailtoSubject}&body=${mailtoBody}`;
+    window.location.href = `mailto:${PORTFOLIO_INFO.email}?subject=${mailtoSubject}&body=${mailtoBody}`;
   };
 
   return (
-    <section id="contact" className="section" aria-label="Contact Arun Prakash V">
-      <div className="sectionTitle">
-        <p>Get in Touch</p>
-        <h2>Let's Build Something Together</h2>
+    <section id="contact" className="section contactSection" aria-label="Contact Arun Prakash V">
+      <div className="sectionHeader">
+        <div className="sectionTag">
+          <MessageSquare size={14} aria-hidden="true" />
+          <span>GET IN TOUCH</span>
+        </div>
+        <h2 className="sectionTitle">Let's Build Something Together</h2>
+        <p className="sectionSubtitle">
+          Seeking full-time Full Stack, Frontend, or Backend Developer opportunities. Feel free to reach out directly for interviews or project discussions.
+        </p>
       </div>
 
-      <div className="contactWrapper">
-        {/* Contact Info Card */}
-        <div className="contactInfoCard">
-          <div className="contactStatus">
-            <span className="contactStatusDot" aria-hidden="true"></span>
-            <div>
-              <strong>Open for Opportunities</strong>
-              <p>Full-time Full Stack, Frontend or Backend Developer roles</p>
+      <div className="contactGridContainer">
+        {/* Left Column: Direct Info */}
+        <div className="contactSidebarCard revealOnScroll">
+          {/* Status Card */}
+          <div className="commissionStatusCard">
+            <div className="statusHeader">
+              <span className="beaconDot" aria-hidden="true"></span>
+              <span className="statusLabel">HIRING STATUS</span>
             </div>
+            <h3 className="statusTitle">{PORTFOLIO_INFO.statusBadge}</h3>
+            <p className="statusDescription">
+              Immediate joiner available for full-time on-site and remote engineering teams.
+            </p>
           </div>
 
-          <div className="contactList">
-            {/* Email Item */}
-            <div className="contactItem">
-              <div className="contactIconWrap" aria-hidden="true">
-                <Mail size={20} />
-              </div>
-              <div className="contactDetail">
-                <span className="contactLabel">Email</span>
-                <a href={`mailto:${email}`} className="contactValue">
-                  {email}
-                </a>
-              </div>
+          {/* Email Item */}
+          <div className="directContactCard">
+            <h4>Direct Email</h4>
+            <div className="emailCopyBox">
+              <span className="emailAddress">{PORTFOLIO_INFO.email}</span>
               <button
                 type="button"
-                onClick={() => copyToClipboard(email, 'email')}
+                onClick={() => copyToClipboard(PORTFOLIO_INFO.email, 'email')}
                 className="copyBtn"
                 aria-label="Copy email address"
-                title="Copy to clipboard"
               >
-                {copiedEmail ? <Check size={16} className="text-cyan" /> : <Copy size={16} />}
+                {copiedEmail ? <Check size={16} /> : <Copy size={16} />}
+                <span>{copiedEmail ? 'Copied!' : 'Copy'}</span>
               </button>
-            </div>
-
-            {/* Phone Item */}
-            <div className="contactItem">
-              <div className="contactIconWrap" aria-hidden="true">
-                <Phone size={20} />
-              </div>
-              <div className="contactDetail">
-                <span className="contactLabel">Phone</span>
-                <a href="tel:+919597477183" className="contactValue">
-                  {phone}
-                </a>
-              </div>
-              <button
-                type="button"
-                onClick={() => copyToClipboard(phone, 'phone')}
-                className="copyBtn"
-                aria-label="Copy phone number"
-                title="Copy to clipboard"
-              >
-                {copiedPhone ? <Check size={16} className="text-cyan" /> : <Copy size={16} />}
-              </button>
-            </div>
-
-            {/* Location Item */}
-            <div className="contactItem">
-              <div className="contactIconWrap" aria-hidden="true">
-                <MapPin size={20} />
-              </div>
-              <div className="contactDetail">
-                <span className="contactLabel">Location</span>
-                <span className="contactValue">Aruppukottai, Tamil Nadu, India</span>
-              </div>
             </div>
           </div>
 
-          <div className="contactSocials">
-            <span className="socialsPrompt">Connect directly:</span>
-            <div className="socialLinksRow">
+          {/* Phone Item */}
+          <div className="directContactCard">
+            <h4>Phone / WhatsApp</h4>
+            <div className="emailCopyBox">
+              <span className="emailAddress">{PORTFOLIO_INFO.phone}</span>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(PORTFOLIO_INFO.phone, 'phone')}
+                className="copyBtn"
+                aria-label="Copy phone number"
+              >
+                {copiedPhone ? <Check size={16} /> : <Copy size={16} />}
+                <span>{copiedPhone ? 'Copied!' : 'Copy'}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Location & Resume Download */}
+          <div className="rateSheetCard">
+            <div className="rateSheetInfo">
+              <h4>Curriculum Vitae</h4>
+              <p>Download my comprehensive resume covering educational credentials, internship deliverables, and technical skills.</p>
+            </div>
+            <a
+              href={PORTFOLIO_INFO.resumeUrl}
+              download
+              className="btn secondary rateSheetBtn"
+              aria-label="Download Arun Prakash V Resume"
+            >
+              <Download size={16} aria-hidden="true" />
+              <span>Download Resume PDF</span>
+            </a>
+          </div>
+
+          {/* Social Profiles */}
+          <div className="socialNetworksCard">
+            <h4>Professional Profiles</h4>
+            <div className="socialIconsGrid">
               <a
-                href="https://github.com/rn-prksh"
+                href={PORTFOLIO_INFO.socials.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contactSocialLink"
-                aria-label="GitHub profile of Arun Prakash V"
+                className="socialLinkItem"
+                aria-label="GitHub profile"
               >
-                <FaGithub size={20} />
+                <FaGithub size={18} />
                 <span>GitHub</span>
               </a>
               <a
-                href="https://www.linkedin.com/in/arun-prakash-v"
+                href={PORTFOLIO_INFO.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contactSocialLink"
-                aria-label="LinkedIn profile of Arun Prakash V"
+                className="socialLinkItem"
+                aria-label="LinkedIn profile"
               >
-                <FaLinkedin size={20} />
+                <FaLinkedin size={18} />
                 <span>LinkedIn</span>
               </a>
               <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=rnprkshv@gmail.com"
+                href={PORTFOLIO_INFO.socials.gmail}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contactSocialLink"
-                aria-label="Open in Gmail Webmail"
+                className="socialLinkItem"
+                aria-label="Gmail Webmail"
               >
                 <Mail size={18} />
-                <span>Gmail</span>
+                <span>Gmail Web</span>
               </a>
             </div>
           </div>
         </div>
 
-        {/* Quick Message Form */}
-        <form className="contactForm" onSubmit={handleSubmit} aria-label="Send direct message">
-          <h3 className="formTitle">Send a Quick Message</h3>
-          <p className="formSubtitle">Have a role, project, or question? Send me a note directly.</p>
-
-          <div className="formGroup">
-            <label htmlFor="name">Your Name</label>
-            <input
-              id="name"
-              type="text"
-              required
-              placeholder="e.g. John Doe / Tech Recruiter"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            />
+        {/* Right Column: Direct Message Composer */}
+        <div className="contactFormCard revealOnScroll">
+          <div className="formHeader">
+            <Sparkles size={18} aria-hidden="true" />
+            <h3>Send a Direct Message</h3>
           </div>
+          <p className="formIntro">
+            Have a role, opportunity, or technical question? Send a note directly to my inbox.
+          </p>
 
-          <div className="formGroup">
-            <label htmlFor="email">Your Email</label>
-            <input
-              id="email"
-              type="email"
-              required
-              placeholder="e.g. recruiter@company.com"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="inquiryForm">
+            <div className="formRow">
+              <div className="formGroup">
+                <label htmlFor="name">Your Name *</label>
+                <input
+                  id="name"
+                  type="text"
+                  required
+                  placeholder="e.g. Alex Morgan / Technical Recruiter"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                />
+              </div>
+              <div className="formGroup">
+                <label htmlFor="email">Your Email *</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  placeholder="alex@company.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                />
+              </div>
+            </div>
 
-          <div className="formGroup">
-            <label htmlFor="subject">Subject</label>
-            <input
-              id="subject"
-              type="text"
-              placeholder="Job Opportunity / Project Collaboration"
-              value={formData.subject}
-              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-            />
-          </div>
+            <div className="formGroup">
+              <label htmlFor="subject">Subject</label>
+              <input
+                id="subject"
+                type="text"
+                placeholder="Job Opportunity / Interview Invitation"
+                value={formData.subject}
+                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+              />
+            </div>
 
-          <div className="formGroup">
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              rows={4}
-              required
-              placeholder="Tell me about the role or project..."
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            />
-          </div>
+            <div className="formGroup">
+              <label htmlFor="message">Message *</label>
+              <textarea
+                id="message"
+                rows={5}
+                required
+                placeholder="Hi Arun, we would like to discuss an opportunity..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              />
+            </div>
 
-          <button type="submit" className="btn primary fullWidth">
-            <Send size={18} aria-hidden="true" />
-            <span>Send Email Message</span>
-          </button>
-        </form>
+            <button type="submit" className="btn primary submitInquiryBtn">
+              <Send size={18} aria-hidden="true" />
+              <span>Send Message</span>
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );

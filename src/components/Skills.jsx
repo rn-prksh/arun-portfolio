@@ -1,64 +1,57 @@
+import { SKILLS_DATA } from '../data/portfolioData';
 import {
   Code2,
   Server,
   Database,
   ShieldCheck,
   Wrench,
-  Terminal,
+  Terminal
 } from 'lucide-react';
 
-const skillGroups = [
-  {
-    title: 'Frontend Development',
-    icon: Code2,
-    skills: ['React.js', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Responsive Design', 'Vite'],
-  },
-  {
-    title: 'Backend Engineering',
-    icon: Server,
-    skills: ['Python (Flask)', 'PHP (Laravel)', 'Node.js', 'Express.js', 'REST APIs', 'MVC Architecture'],
-  },
-  {
-    title: 'Database & Storage',
-    icon: Database,
-    skills: ['MySQL', 'Relational Schema Design', 'Query Optimization', 'CRUD Operations'],
-  },
-  {
-    title: 'Auth & Security',
-    icon: ShieldCheck,
-    skills: ['JWT Authentication', 'OAuth 2.0 (Google, Zoho)', 'Firebase Auth', 'Role-Based Access Control'],
-  },
-  {
-    title: 'Developer Tools',
-    icon: Wrench,
-    skills: ['Git', 'GitHub', 'Postman', 'Bruno API Client', 'VS Code', 'npm / Vite'],
-  },
-  {
-    title: 'Programming Languages',
-    icon: Terminal,
-    skills: ['Python', 'JavaScript', 'PHP', 'C', 'Java', 'SQL'],
-  },
-];
+const iconMap = {
+  Code2,
+  Server,
+  Database,
+  ShieldCheck,
+  Wrench,
+  Terminal
+};
 
 function Skills() {
   return (
-    <section id="skills" className="section" aria-label="Technical Skills">
-      <div className="sectionTitle">
-        <p>Technical Expertise</p>
-        <h2>Skills & Technologies</h2>
+    <section id="skills" className="section skillsSection" aria-label="Technical Skills">
+      <div className="sectionHeader">
+        <div className="sectionTag">
+          <Code2 size={14} aria-hidden="true" />
+          <span>TECHNICAL EXPERTISE</span>
+        </div>
+        <h2 className="sectionTitle">Skills & Technologies</h2>
+        <p className="sectionSubtitle">
+          Production-proven technical skills developed across frontend design systems, backend REST APIs, relational databases, and secure authentication protocols.
+        </p>
       </div>
 
       <div className="skillsGrid">
-        {skillGroups.map((group) => {
-          const Icon = group.icon;
+        {SKILLS_DATA.map((group) => {
+          const Icon = iconMap[group.icon] || Code2;
           return (
-            <div className="skillCard" key={group.title}>
+            <div className="skillCard revealOnScroll" key={group.title}>
               <div className="skillCardHeader">
                 <div className="skillIconWrap" aria-hidden="true">
                   <Icon size={20} />
                 </div>
-                <h3>{group.title}</h3>
+                <div className="skillTitleGroup">
+                  <h3>{group.title}</h3>
+                  <span className="skillProficiencyPercent">{group.level}% Proficiency</span>
+                </div>
               </div>
+
+              {/* Animated Progress Bar */}
+              <div className="progressTrack" role="progressbar" aria-valuenow={group.level} aria-valuemin="0" aria-valuemax="100">
+                <div className="progressBar" style={{ width: `${group.level}%` }}></div>
+              </div>
+
+              {/* Skill Tags */}
               <div className="skillTags">
                 {group.skills.map((skill) => (
                   <span className="skillTag" key={skill}>

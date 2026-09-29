@@ -1,158 +1,181 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, FileText } from 'lucide-react';
-
-const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Contact', href: '#contact' },
-];
+import { Download, Menu, X, Box } from 'lucide-react';
+import { PORTFOLIO_INFO } from '../data/portfolioData';
 
 function Navbar() {
-  const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const isScrolled = window.scrollY > 40;
+          setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
 
-      // Determine active section
-      const sections = navItems.map((item) => item.href.slice(1));
-      const scrollPosition = window.scrollY + 160;
+          const sections = ['home', 'freelance', 'about', 'skills', 'experience', 'projects', 'contact'];
+          const scrollPos = window.scrollY + 200;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i]);
-          break;
-        }
+          for (const sectionId of sections) {
+            const el = document.getElementById(sectionId);
+            if (el) {
+              const top = el.offsetTop;
+              const height = el.offsetHeight;
+              if (scrollPos >= top && scrollPos < top + height) {
+                setActiveSection(sectionId);
+                break;
+              }
+            }
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on Escape key press
+  // Lock body scroll when mobile menu is open to prevent background scrolling
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setOpen(false);
-    };
-    if (open) {
-      window.addEventListener('keydown', handleKeyDown);
+    if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [open]);
+  }, [mobileMenuOpen]);
+
+  // Close on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const closeMenu = () => setMobileMenuOpen(false);
 
   return (
-    <header className={`navbar ${scrolled ? 'navbarScrolled' : ''}`}>
-      <div className="navbarContainer">
-        <a href="#home" className="logo" aria-label="Arun Prakash V Home">
-          Arun<span className="logoDot">.</span>
+    <header className={`navbarHeader ${scrolled ? 'scrolled' : ''}`}>
+      <div className="navContainer">
+        {/* Brand Logo */}
+        <a href="#home" className="navLogo" onClick={closeMenu} aria-label="Arun Prakash V Portfolio Home">
+          <div className="logoCubeIcon">
+            <Box size={20} aria-hidden="true" />
+          </div>
+          <div className="logoTextGroup">
+            <span className="logoName">{PORTFOLIO_INFO.name}</span>
+            <span className="logoRole">WEB DEVELOPER • FREELANCE</span>
+          </div>
         </a>
 
+        {/* Live Availability Beacon */}
+        <a href="#freelance" className="commissionBeacon" title="Available for Freelance Projects">
+          <span className="beaconDot" aria-hidden="true"></span>
+          <span className="beaconText">Available for Freelance</span>
+        </a>
+
+        {/* Desktop Navigation */}
         <nav className="desktopNav" aria-label="Main Navigation">
           <ul className="navLinks">
-            {navItems.map((item) => {
-              const sectionId = item.href.slice(1);
-              const isActive = activeSection === sectionId;
-              return (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className={`navLink ${isActive ? 'active' : ''}`}
-                    aria-current={isActive ? 'page' : undefined}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              );
-            })}
+            <li>
+              <a href="#freelance" className={activeSection === 'freelance' ? 'active' : ''}>
+                Freelance
+              </a>
+            </li>
+            <li>
+              <a href="#about" className={activeSection === 'about' ? 'active' : ''}>
+                About
+              </a>
+            </li>
+            <li>
+              <a href="#skills" className={activeSection === 'skills' ? 'active' : ''}>
+                Skills
+              </a>
+            </li>
+            <li>
+              <a href="#experience" className={activeSection === 'experience' ? 'active' : ''}>
+                Experience
+              </a>
+            </li>
+            <li>
+              <a href="#projects" className={activeSection === 'projects' ? 'active' : ''}>
+                Projects
+              </a>
+            </li>
+            <li>
+              <a href="#contact" className={activeSection === 'contact' ? 'active' : ''}>
+                Contact
+              </a>
+            </li>
           </ul>
-        </nav>
 
-        <div className="navActions">
           <a
-            href="/resume/Arun_Prakash_bsc_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={PORTFOLIO_INFO.resumeUrl}
             className="navResumeBtn"
-            aria-label="View Resume PDF"
+            download
+            aria-label="Download Arun Prakash V Resume in PDF format"
           >
-            <FileText size={16} />
+            <Download size={14} aria-hidden="true" />
             <span>Resume</span>
           </a>
+        </nav>
 
-          <button
-            className="menuBtn"
-            onClick={() => setOpen(!open)}
-            aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={open}
-            aria-controls="mobile-nav"
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        {/* Mobile Toggle Button */}
+        <button
+          className="mobileToggleBtn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={mobileMenuOpen}
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
 
-      {/* Mobile Drawer Navigation */}
-      <div
-        id="mobile-nav"
-        className={`mobileNav ${open ? 'mobileNavOpen' : ''}`}
-        aria-hidden={!open}
-      >
-        <div className="mobileNavOverlay" onClick={() => setOpen(false)} />
-        <div className="mobileNavContent">
-          <div className="mobileNavHeader">
-            <span className="logo">Arun<span className="logoDot">.</span></span>
-            <button
-              className="mobileCloseBtn"
-              onClick={() => setOpen(false)}
-              aria-label="Close menu"
-            >
-              <X size={24} />
-            </button>
-          </div>
-          <ul className="mobileNavLinks">
-            {navItems.map((item) => {
-              const sectionId = item.href.slice(1);
-              const isActive = activeSection === sectionId;
-              return (
-                <li key={item.name}>
-                  <a
-                    href={item.href}
-                    className={`mobileNavLink ${isActive ? 'active' : ''}`}
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-          <div className="mobileNavFooter">
+      {/* Mobile Drawer */}
+      <div className={`mobileDrawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <ul className="mobileNavLinks">
+          <li>
+            <a href="#home" onClick={closeMenu}>Home</a>
+          </li>
+          <li>
+            <a href="#freelance" onClick={closeMenu}>Freelance Services</a>
+          </li>
+          <li>
+            <a href="#about" onClick={closeMenu}>About Me</a>
+          </li>
+          <li>
+            <a href="#skills" onClick={closeMenu}>Skills & Stack</a>
+          </li>
+          <li>
+            <a href="#experience" onClick={closeMenu}>Experience</a>
+          </li>
+          <li>
+            <a href="#projects" onClick={closeMenu}>Featured Projects</a>
+          </li>
+          <li>
+            <a href="#contact" onClick={closeMenu}>Contact & Hire</a>
+          </li>
+          <li className="mobileReelItem">
             <a
-              href="/resume/Arun_Prakash_bsc_Resume.pdf"
+              href={PORTFOLIO_INFO.resumeUrl}
               download
+              onClick={closeMenu}
               className="btn primary fullWidth"
-              onClick={() => setOpen(false)}
             >
-              <FileText size={18} />
-              Download Resume
+              <Download size={16} aria-hidden="true" />
+              <span>Download Resume PDF</span>
             </a>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </header>
   );
