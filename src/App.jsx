@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Freelance from './components/Freelance';
@@ -13,24 +13,41 @@ import { ArrowUp } from 'lucide-react';
 
 function App() {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const progressBarRef = useRef(null);
 
+  // High-performance scroll handler with requestAnimationFrame & direct DOM mutation
+  // Prevents re-rendering the whole component tree on every scroll pixel!
   useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const windowHeight =
-        document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const progress = windowHeight > 0 ? (totalScroll / windowHeight) * 100 : 0;
+    let ticking = false;
 
-      setScrollProgress(progress);
-      setShowScrollTop(totalScroll > 500);
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const totalScroll = document.documentElement.scrollTop || document.body.scrollTop;
+          const windowHeight =
+            document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const progress = windowHeight > 0 ? (totalScroll / windowHeight) * 100 : 0;
+
+          if (progressBarRef.current) {
+            progressBarRef.current.style.width = `${progress}%`;
+          }
+
+          const shouldShow = totalScroll > 500;
+          setShowScrollTop((prev) => (prev !== shouldShow ? shouldShow : prev));
+
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Eager, instant scroll reveal: triggers 250px BEFORE entering viewport!
+  // Ensures user NEVER sees blank spaces while scrolling.
   useEffect(() => {
     const observerCallback = (entries, observer) => {
       entries.forEach((entry) => {
@@ -43,14 +60,24 @@ function App() {
 
     const observer = new IntersectionObserver(observerCallback, {
       root: null,
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0,
+      rootMargin: '250px 0px 100px 0px'
     });
 
-    const elementsToAnimate = document.querySelectorAll('.revealOnScroll, .sectionTitle, .sectionHeader');
+    const elementsToAnimate = document.querySelectorAll('.revealOnScroll');
     elementsToAnimate.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Safety fallback: ensure all content becomes visible immediately after 300ms
+    const timer = setTimeout(() => {
+      document.querySelectorAll('.revealOnScroll:not(.inView)').forEach((el) => {
+        el.classList.add('inView');
+      });
+    }, 300);
+
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+    };
   }, []);
 
   const scrollToTop = () => {
@@ -61,8 +88,9 @@ function App() {
     <div className="portfolioApp">
       {/* Luminous Top Scroll Progress Bar */}
       <div
+        ref={progressBarRef}
         className="topScrollProgressBar"
-        style={{ width: `${scrollProgress}%` }}
+        style={{ width: '0%' }}
         aria-hidden="true"
       ></div>
 

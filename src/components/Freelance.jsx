@@ -75,7 +75,7 @@ function Freelance() {
               <div
                 className="serviceCard revealOnScroll"
                 key={service.title}
-                style={{ animationDelay: `${idx * 0.06}s` }}
+                
               >
                 <div className="serviceIconBox" aria-hidden="true">
                   <Icon size={22} />

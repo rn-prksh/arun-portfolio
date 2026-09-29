@@ -54,7 +54,7 @@ function Projects({ onSelectProject }) {
           <article
             className="projectCard revealOnScroll"
             key={project.id}
-            style={{ animationDelay: `${idx * 0.1}s` }}
+            
             onMouseEnter={() => setHoveredProjectId(project.id)}
             onMouseLeave={() => setHoveredProjectId(null)}
           >
