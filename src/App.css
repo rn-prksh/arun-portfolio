@@ -3199,3 +3199,1114 @@ button {
   font-size: 13px;
   color: var(--accent-cyan);
 }
+
+/* Current Role Highlight in Timeline */
+.currentDot {
+  background: var(--accent-emerald) !important;
+  box-shadow: 0 0 16px var(--accent-emerald) !important;
+}
+
+.activeRoleCard {
+  border-color: rgba(16, 185, 129, 0.45) !important;
+  background: rgba(16, 185, 129, 0.05) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(16, 185, 129, 0.12) !important;
+}
+
+.currentExpBadge {
+  background: rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  color: #34d399 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.currentPeriodWrap {
+  background: rgba(16, 185, 129, 0.1) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+  color: var(--accent-emerald) !important;
+}
+
+.currentTechPill {
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  color: #a7f3d0 !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+}
+
+/* ==========================================================================
+   Freelance Web Development Section
+   ========================================================================== */
+.freelanceSection {
+  padding-top: 100px;
+}
+
+.targetClientsBanner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(13, 17, 26, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 12px 24px;
+  max-width: 820px;
+  margin: 0 auto 56px;
+}
+
+.targetClientsLabel {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--accent-cyan);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.clientTypeBadges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.clientBadge {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-body);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+}
+
+.servicesCategoryBlock {
+  margin-bottom: 72px;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1040px) {
+  .servicesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.serviceCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.serviceCard:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-5px);
+  background: var(--bg-card-hover);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.12);
+}
+
+.serviceIconBox {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(245, 158, 11, 0.12));
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.serviceTitle {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.2px;
+}
+
+.serviceDesc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Why Work With Me */
+.whyWorkWithMeSection {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  margin-bottom: 60px;
+}
+
+.whyHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.whyHeader h3 {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.whyIntro {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  max-width: 640px;
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 640px) {
+  .whyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1040px) {
+  .whyGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.whyCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.whyCard:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.05);
+  transform: translateY(-2px);
+}
+
+.whyCheckWrap {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.whyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.whyTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.whyDesc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* High Converting CTA Banner */
+.freelanceCtaBanner {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), rgba(245, 158, 11, 0.08));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(56, 189, 248, 0.12);
+}
+
+.ctaContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 660px;
+}
+
+.ctaPretitle {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 2px;
+}
+
+.ctaTitle {
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 900;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.ctaSubtitle {
+  font-size: 15px;
+  color: var(--text-body);
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   Comprehensive Multi-Device Responsive System (All Devices & Screen Sizes)
+   Breakpoints:
+   - Ultra-Compact Mobile: <= 375px (iPhone SE, Galaxy Z Flip, Fold cover)
+   - Standard Mobile: <= 480px (iPhone 12/13/14/15/16, Galaxy S-series, Pixel)
+   - Phablets & Small Tablets: <= 768px (iPad Mini portrait, large mobiles)
+   - Tablets & Small Laptops: <= 991px (iPad Air/Pro, Surface)
+   - Laptops & Desktops: 992px - 1440px
+   - Ultra-Wide Displays: >= 1441px
+   ========================================================================== */
+
+/* Universal Responsive Base Guards */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Touch feedback and tap sizes */
+button, a, input, textarea, select {
+  touch-action: manipulation;
+}
+
+/* Ensure no elements exceed screen width */
+.portfolioApp {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop & Tablet Navigation Breakdown (<= 991px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .commissionBeacon {
+    display: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .commissionBeacon {
+    display: inline-flex !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .navLinks {
+    gap: 14px;
+  }
+  .navLinks a {
+    font-size: 13px;
+  }
+  .navResumeBtn {
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tablets & Mobile Breakpoint (<= 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Navigation */
+  .desktopNav {
+    display: none !important;
+  }
+
+  .mobileToggleBtn {
+    display: flex !important;
+  }
+
+  .navbarHeader {
+    padding: 14px 0;
+  }
+
+  .navbarHeader.scrolled {
+    padding: 10px 0;
+  }
+
+  .navContainer {
+    width: 92%;
+  }
+
+  .logoCubeIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .logoName {
+    font-size: 15px;
+  }
+
+  .logoRole {
+    font-size: 9px;
+  }
+
+  .mobileDrawer {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 24px 20px 36px;
+    background: rgba(7, 9, 14, 0.97);
+    backdrop-filter: blur(28px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .mobileNavLinks {
+    gap: 16px;
+  }
+
+  .mobileNavLinks a {
+    font-size: 16px;
+    padding: 8px 0;
+    display: block;
+  }
+
+  /* Section Spacing */
+  .section {
+    padding: 72px 0;
+    width: 90%;
+  }
+
+  .sectionHeader {
+    margin-bottom: 40px;
+  }
+
+  .sectionTitle {
+    font-size: clamp(26px, 6.5vw, 36px);
+  }
+
+  .sectionSubtitle {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Hero Section */
+  .heroSection {
+    min-height: auto;
+    padding: 96px 0 44px;
+  }
+
+  .heroBadge {
+    font-size: 11px;
+    padding: 5px 12px;
+    margin-bottom: 18px;
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  .heroPretitle {
+    font-size: 12px;
+    letter-spacing: 2px;
+  }
+
+  .heroMainName {
+    font-size: clamp(34px, 8vw, 48px);
+  }
+
+  .heroRoleHighlight {
+    font-size: clamp(20px, 5.5vw, 32px);
+  }
+
+  .heroDescription {
+    font-size: 14px;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  .heroCtaGroup {
+    width: 100%;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .heroScrollIndicator {
+    display: none;
+  }
+
+  .viewportHint {
+    display: none;
+  }
+
+  .canvasControls {
+    bottom: 12px;
+    right: 12px;
+    padding: 4px 8px;
+    gap: 4px;
+    font-size: 10px;
+    transform: scale(0.9);
+    transform-origin: bottom right;
+  }
+
+  /* Freelance Section */
+  .freelanceSection {
+    padding-top: 60px;
+  }
+
+  .targetClientsBanner {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 18px;
+    margin-bottom: 36px;
+    border-radius: var(--radius-md);
+  }
+
+  .clientTypeBadges {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .clientBadge {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .servicesCategoryBlock {
+    margin-bottom: 48px;
+  }
+
+  .servicesGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .serviceCard {
+    padding: 22px 18px;
+  }
+
+  .whyWorkWithMeSection {
+    padding: 28px 20px;
+    margin-bottom: 40px;
+    border-radius: var(--radius-md);
+  }
+
+  .whyGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .freelanceCtaBanner {
+    padding: 32px 20px;
+    border-radius: var(--radius-md);
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .ctaActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .ctaActions .btn {
+    width: 100%;
+  }
+
+  /* About Section */
+  .aboutMainGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .artistBioCard {
+    padding: 26px 20px;
+  }
+
+  .artistAvatarWrapper {
+    max-width: 280px;
+  }
+
+  .softwareProficiencyCard {
+    padding: 26px 20px;
+  }
+
+  /* Skills Section */
+  .skillsGrid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .skillCard {
+    padding: 20px 18px;
+  }
+
+  /* Projects Grid */
+  .projectsGridContainer {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Contact Section */
+  .contactGridContainer {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .contactSidebarCard {
+    padding: 24px 20px;
+  }
+
+  .contactFormCard {
+    padding: 28px 20px;
+  }
+
+  /* Footer */
+  .footerTopGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footerBottomBar {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .footerBackToTopBtn {
+    margin-top: 4px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Standard Mobile Phones (<= 540px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 540px) {
+  .section {
+    padding: 56px 0;
+    width: 92%;
+  }
+
+  .sectionHeader {
+    margin-bottom: 30px;
+  }
+
+  .sectionTag {
+    font-size: 11px;
+    padding: 4px 10px;
+    margin-bottom: 12px;
+  }
+
+  .sectionTitle {
+    font-size: clamp(24px, 7vw, 30px);
+  }
+
+  .sectionSubtitle {
+    font-size: 13px;
+  }
+
+  /* Hero Call-To-Action Stack */
+  .heroCtaGroup {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .heroCtaGroup .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 13px 20px;
+  }
+
+  .heroQuickEmail {
+    width: 100%;
+  }
+
+  .copyEmailBtn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 14px;
+  }
+
+  .heroSocialsRow {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .heroSocialIconBtn {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+
+  .pipelineTicker {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  /* Freelance Cards */
+  .serviceCard {
+    padding: 18px 16px;
+  }
+
+  .serviceTitle {
+    font-size: 16px;
+  }
+
+  .serviceDesc {
+    font-size: 12px;
+  }
+
+  .whyWorkWithMeSection {
+    padding: 20px 16px;
+  }
+
+  .whyHeader h3 {
+    font-size: 20px;
+  }
+
+  .whyIntro {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .whyCard {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .freelanceCtaBanner {
+    padding: 24px 16px;
+  }
+
+  .ctaTitle {
+    font-size: clamp(20px, 5.5vw, 24px);
+  }
+
+  .ctaSubtitle {
+    font-size: 13px;
+  }
+
+  /* About Card */
+  .artistBioCard {
+    padding: 20px 16px;
+  }
+
+  .artistAvatarWrapper {
+    max-width: 240px;
+  }
+
+  .avatarStatusPill {
+    font-size: 10px;
+    padding: 4px 10px;
+    width: 92%;
+    justify-content: center;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .artistNameHeading {
+    font-size: 20px;
+  }
+
+  .artistBioText {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .highlightsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .highlightCard {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .highlightIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .highlightValue {
+    font-size: 16px;
+  }
+
+  .softwareProficiencyCard {
+    padding: 20px 16px;
+  }
+
+  .devEnvGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .devEnvItem {
+    padding: 14px;
+  }
+
+  /* Timeline */
+  .timeline {
+    gap: 20px;
+  }
+
+  .timelineItem {
+    grid-template-columns: 24px 1fr;
+    gap: 12px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    margin-top: 6px;
+  }
+
+  .timelineCard {
+    padding: 18px 14px;
+    gap: 14px;
+  }
+
+  .timelineRoleWrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .timelineRoleWrap h3 {
+    font-size: 16px;
+  }
+
+  .expBadge {
+    font-size: 10px;
+    padding: 2px 6px;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  .timelineMeta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 12px;
+  }
+
+  .periodWrap {
+    font-size: 11px;
+    padding: 4px 8px;
+    flex-wrap: wrap;
+  }
+
+  .timelinePoints {
+    gap: 8px;
+  }
+
+  .timelinePoints li {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .expTechTags {
+    gap: 6px;
+  }
+
+  .techPill {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+
+  /* Projects Section */
+  .categoryFilterContainer {
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+
+  .categoryTabBtn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .projectCardDetails {
+    padding: 18px 14px;
+  }
+
+  .projectCardTitle {
+    font-size: 17px;
+  }
+
+  .projectCardSnippet {
+    font-size: 12px;
+  }
+
+  .projectLinksRow {
+    gap: 8px;
+  }
+
+  .projectLinksRow .btn {
+    flex: 1;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+
+  /* Contact Sidebar & Inputs */
+  .contactSidebarCard {
+    padding: 18px 14px;
+    gap: 16px;
+  }
+
+  .commissionStatusCard {
+    padding: 14px;
+  }
+
+  .statusTitle {
+    font-size: 15px;
+  }
+
+  .directContactCard {
+    padding: 14px;
+  }
+
+  .emailCopyBox {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .emailAddress {
+    font-size: 12px;
+    text-align: center;
+    word-break: break-all;
+  }
+
+  .emailCopyBox .copyBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .rateSheetCard {
+    padding: 14px;
+  }
+
+  .rateSheetBtn {
+    width: 100%;
+  }
+
+  .socialIconsGrid {
+    gap: 8px;
+  }
+
+  .socialLinkItem {
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+
+  .contactFormCard {
+    padding: 20px 14px;
+  }
+
+  .formIntro {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  .formRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Critical iOS Fix: Inputs must be at least 16px to prevent viewport zoom */
+  .inquiryForm input,
+  .inquiryForm textarea {
+    font-size: 16px !important;
+    padding: 12px 14px;
+  }
+
+  .submitInquiryBtn {
+    width: 100%;
+  }
+
+  /* Floating Scroll Button on Mobile */
+  .floatingScrollBtn {
+    bottom: 16px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Extra-Small Screens (<= 375px: iPhone SE, Galaxy Fold cover)
+   -------------------------------------------------------------------------- */
+@media (max-width: 375px) {
+  .section {
+    padding: 48px 0;
+    width: 94%;
+  }
+
+  .sectionTitle {
+    font-size: 24px;
+  }
+
+  .heroMainName {
+    font-size: 30px;
+  }
+
+  .heroRoleHighlight {
+    font-size: 19px;
+  }
+
+  .heroBadge {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .artistAvatarWrapper {
+    max-width: 210px;
+  }
+
+  .clientBadge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .serviceCard {
+    padding: 16px 12px;
+  }
+
+  .whyWorkWithMeSection {
+    padding: 16px 12px;
+  }
+
+  .freelanceCtaBanner {
+    padding: 20px 12px;
+  }
+
+  .ctaTitle {
+    font-size: 20px;
+  }
+
+  .timelineCard {
+    padding: 14px 12px;
+  }
+
+  .contactSidebarCard,
+  .contactFormCard {
+    padding: 16px 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Modal Responsiveness (Project Details Modal)
+   -------------------------------------------------------------------------- */
+@media (max-width: 859px) {
+  .projectModalContent {
+    width: 96%;
+    max-height: 94vh;
+    border-radius: var(--radius-md);
+  }
+
+  .projectModalHeader {
+    padding: 14px 18px;
+  }
+
+  .projectModalBody {
+    padding: 18px 16px;
+    gap: 20px;
+  }
+
+  .projectOverviewGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .projectTitleLarge {
+    font-size: 22px;
+  }
+
+  .architectureCard {
+    font-size: 11px;
+    word-break: break-all;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectModalHeader {
+    padding: 12px 14px;
+  }
+
+  .projectCategoryBadge,
+  .projectClientBadge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .modalCloseBtn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .modalHighlightItem {
+    font-size: 13px;
+  }
+
+  .softwarePill {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .wipImageFrame {
+    aspect-ratio: 16 / 9;
+    max-height: 240px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Ultra-Wide Screens (>= 1441px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1441px) {
+  .section {
+    width: min(1360px, 90%);
+  }
+  .navContainer {
+    width: min(1360px, 90%);
+  }
+  .heroForeground {
+    width: min(1360px, 90%);
+  }
+}

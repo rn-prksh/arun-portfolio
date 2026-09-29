@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Freelance from './components/Freelance';
 import About from './components/About';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
@@ -73,6 +74,7 @@ function App() {
 
       <main id="main">
         <Hero />
+        <Freelance />
         <About />
         <Skills />
         <Experience />

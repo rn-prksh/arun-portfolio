@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Download, Menu, X, Box, ArrowRight } from 'lucide-react';
+import { Download, Menu, X, Box } from 'lucide-react';
 import { PORTFOLIO_INFO } from '../data/portfolioData';
 
 function Navbar() {
@@ -11,7 +11,7 @@ function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
 
-      const sections = ['home', 'about', 'skills', 'experience', 'projects', 'contact'];
+      const sections = ['home', 'freelance', 'about', 'skills', 'experience', 'projects', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -31,6 +31,27 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open to prevent background scrolling
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  // Close on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   const closeMenu = () => setMobileMenuOpen(false);
 
   return (
@@ -43,19 +64,24 @@ function Navbar() {
           </div>
           <div className="logoTextGroup">
             <span className="logoName">{PORTFOLIO_INFO.name}</span>
-            <span className="logoRole">FULL STACK DEVELOPER</span>
+            <span className="logoRole">WEB DEVELOPER • FREELANCE</span>
           </div>
         </a>
 
         {/* Live Availability Beacon */}
-        <div className="commissionBeacon" title={PORTFOLIO_INFO.statusBadge}>
+        <a href="#freelance" className="commissionBeacon" title="Available for Freelance Projects">
           <span className="beaconDot" aria-hidden="true"></span>
-          <span className="beaconText">Available for Hire</span>
-        </div>
+          <span className="beaconText">Available for Freelance</span>
+        </a>
 
         {/* Desktop Navigation */}
         <nav className="desktopNav" aria-label="Main Navigation">
           <ul className="navLinks">
+            <li>
+              <a href="#freelance" className={activeSection === 'freelance' ? 'active' : ''}>
+                Freelance
+              </a>
+            </li>
             <li>
               <a href="#about" className={activeSection === 'about' ? 'active' : ''}>
                 About
@@ -110,6 +136,9 @@ function Navbar() {
         <ul className="mobileNavLinks">
           <li>
             <a href="#home" onClick={closeMenu}>Home</a>
+          </li>
+          <li>
+            <a href="#freelance" onClick={closeMenu}>Freelance Services</a>
           </li>
           <li>
             <a href="#about" onClick={closeMenu}>About Me</a>

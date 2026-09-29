@@ -12,7 +12,7 @@ import {
   Terminal,
   Cpu,
   CheckCircle,
-  ArrowRight
+  Sparkles
 } from 'lucide-react';
 
 const iconMap = {
@@ -32,7 +32,7 @@ function About() {
         </div>
         <h2 className="sectionTitle">Engineering With Passion & Purpose</h2>
         <p className="sectionSubtitle">
-          A dedicated Full Stack Developer with hands-on enterprise internship experience, building performant web applications with modern frontend and backend architectures.
+          Web Developer at WARX Digital Pvt Ltd with 1.5+ years of software development experience building ERPs, E-commerce platforms, AI Agents, and robust REST APIs.
         </p>
       </div>
 
@@ -50,7 +50,7 @@ function About() {
               <source srcSet="/images/profile.webp" type="image/webp" />
               <img
                 src="/images/profile.png"
-                alt="Arun Prakash V - Full Stack Developer"
+                alt="Arun Prakash V - Web Developer"
                 className="artistPortraitImg"
                 width="360"
                 height="360"
@@ -58,7 +58,7 @@ function About() {
             </picture>
             <div className="avatarStatusPill">
               <span className="pulseGreen"></span>
-              <span>Ready for Immediate Deployment</span>
+              <span>Web Developer @ WARX Digital</span>
             </div>
           </div>
 
@@ -66,24 +66,24 @@ function About() {
             <h3 className="artistNameHeading">{PORTFOLIO_INFO.name}</h3>
             <p className="artistTitleSub">{PORTFOLIO_INFO.title}</p>
             <p className="artistBioText">
-              I am a <strong>B.Sc. Information Technology graduate</strong> from VHNSN College, Virudhunagar, with over a year of immersive full stack web development internship experience at <strong>DCE Technology</strong>.
+              I am currently working as a <strong>Web Developer at WARX Digital Pvt Ltd (since July 2026)</strong>, where I develop and maintain enterprise ERP systems, mission-critical E-commerce platforms, and engineer autonomous <strong>AI Agent projects</strong> utilizing <strong>CodeIgniter 3 (CI3)</strong>, <strong>React.js</strong>, and <strong>MySQL</strong>.
             </p>
             <p className="artistBioText">
-              My engineering expertise spans both frontend and backend domains: creating performant interfaces in <strong>React.js</strong> and engineering robust, secure RESTful backends using <strong>Python Flask</strong> and <strong>PHP Laravel</strong> backed by optimized <strong>MySQL</strong> databases.
+              Prior to WARX Digital, I completed over a year of immersive full stack software engineering internships at <strong>DCE Technology</strong>, delivering production web applications in <strong>Python Flask</strong>, <strong>Laravel</strong>, and <strong>React.js</strong>. Graduated with a <strong>B.Sc. in Information Technology</strong> from VHNSN College, Virudhunagar.
             </p>
 
             <div className="availabilityList">
               <div className="availabilityItem">
                 <CheckCircle size={16} className="availIcon" aria-hidden="true" />
-                <span>Full-time Full Stack Developer Roles</span>
+                <span>Web Developer at WARX Digital Pvt Ltd (Active)</span>
               </div>
               <div className="availabilityItem">
                 <CheckCircle size={16} className="availIcon" aria-hidden="true" />
-                <span>Backend API & Microservices Engineering</span>
+                <span>ERP & E-Commerce Web Engineering (CI3 / React)</span>
               </div>
               <div className="availabilityItem">
                 <CheckCircle size={16} className="availIcon" aria-hidden="true" />
-                <span>Frontend React.js SPA Architecture</span>
+                <span>Autonomous AI Agent Pipelines & Workflows</span>
               </div>
             </div>
           </div>
@@ -92,10 +92,10 @@ function About() {
         {/* Right: Key Credentials Highlights */}
         <div className="aboutRightCol">
           <div className="highlightsGrid revealOnScroll">
-            {ABOUT_HIGHLIGHTS.map((item) => {
+            {ABOUT_HIGHLIGHTS.map((item, idx) => {
               const Icon = iconMap[item.category] || Code2;
               return (
-                <div className="highlightCard" key={item.title}>
+                <div className="highlightCard" key={idx}>
                   <div className="highlightIcon">
                     <Icon size={22} aria-hidden="true" />
                   </div>
@@ -113,10 +113,10 @@ function About() {
           <div className="softwareProficiencyCard revealOnScroll">
             <div className="cardHeader">
               <Cpu size={18} aria-hidden="true" />
-              <h3>Development Workstation & Engineering Environment</h3>
+              <h3>Production Engineering & AI Architecture</h3>
             </div>
             <p className="cardIntroText">
-              Core technologies, design patterns, and protocols utilized daily for scalable full stack development:
+              Core technologies, enterprise architectures, and automation frameworks utilized daily for production applications:
             </p>
 
             <div className="devEnvGrid">

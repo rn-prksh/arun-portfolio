@@ -12,21 +12,21 @@ function Footer() {
       <div className="footerInner">
         <div className="footerTopGrid">
           <div className="footerBrandCol">
-            <a href="#home" className="footerLogoLink">
+            <a href="#home" className="footerLogoLink" aria-label="Arun Prakash V Home">
               <div className="footerLogoIcon">
                 <Box size={22} aria-hidden="true" />
               </div>
               <div className="footerLogoTexts">
                 <span className="footerBrandName">{PORTFOLIO_INFO.name}</span>
-                <span className="footerBrandTitle">FULL STACK DEVELOPER</span>
+                <span className="footerBrandTitle">WEB DEVELOPER • FULL STACK</span>
               </div>
             </a>
             <p className="footerTagline">
-              Motivated Full Stack Developer specialized in React.js, Python Flask, PHP Laravel, and MySQL. Engineering scalable architectures and clean REST APIs.
+              Web Developer at WARX Digital Pvt Ltd specializing in CodeIgniter 3, React.js, MySQL, and AI Agent workflows. Available for high-impact freelance web projects.
             </p>
             <div className="footerPipelineBadge">
               <span className="pipelineDot"></span>
-              <span>Stack: React.js • Flask • Laravel • MySQL</span>
+              <span>WARX Digital • ERP, E-Commerce & AI</span>
             </div>
           </div>
 
@@ -34,13 +34,16 @@ function Footer() {
             <h4 className="footerColTitle">Navigation</h4>
             <ul className="footerLinksList">
               <li>
+                <a href="#freelance">Freelance Services</a>
+              </li>
+              <li>
                 <a href="#about">About Me</a>
               </li>
               <li>
                 <a href="#skills">Technical Skills</a>
               </li>
               <li>
-                <a href="#experience">Internship Experience</a>
+                <a href="#experience">Work Experience</a>
               </li>
               <li>
                 <a href="#projects">Recent Projects</a>
@@ -50,7 +53,7 @@ function Footer() {
               </li>
               <li>
                 <a href={PORTFOLIO_INFO.resumeUrl} download>
-                  Download Resume
+                  Download Resume PDF
                 </a>
               </li>
             </ul>
@@ -85,7 +88,7 @@ function Footer() {
 
         <div className="footerBottomBar">
           <p className="copyrightText">
-            © {new Date().getFullYear()} {PORTFOLIO_INFO.name}. Designed & Developed with React.js & Vite.
+            © {new Date().getFullYear()} {PORTFOLIO_INFO.name}. Engineering Web Solutions with React.js & Vite.
           </p>
           <button
             onClick={scrollToTop}

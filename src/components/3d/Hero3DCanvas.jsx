@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 /**
  * High-performance, zero-dependency interactive 3D WebGL / Canvas Viewport.
  * Renders an interactive 3D geometric polyhedral wireframe + ambient particle dust
- * with mouse-parallax, depth perspective, and glowing vertices.
+ * with mouse-parallax, touch interaction, depth perspective, and glowing vertices.
+ * Fully responsive across all mobile, tablet, and desktop viewports.
  */
 function Hero3DCanvas() {
   const canvasRef = useRef(null);
@@ -19,8 +20,6 @@ function Hero3DCanvas() {
     let animationFrameId;
     let isVisible = true;
 
-    let mouseX = 0;
-    let mouseY = 0;
     let targetRotX = 0.4;
     let targetRotY = 0.6;
     let rotX = 0;
@@ -49,7 +48,18 @@ function Hero3DCanvas() {
       targetRotX = -y * 2.2;
     };
 
+    const handleTouchMove = (e) => {
+      if (!containerRef.current || e.touches.length === 0) return;
+      const touch = e.touches[0];
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = (touch.clientX - rect.left) / rect.width - 0.5;
+      const y = (touch.clientY - rect.top) / rect.height - 0.5;
+      targetRotY = x * 2.2;
+      targetRotX = -y * 2.2;
+    };
+
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     // Generate 3D geometry: Icosahedron / Geodesic Sphere
     const t = (1.0 + Math.sqrt(5.0)) / 2.0;
@@ -94,7 +104,7 @@ function Hero3DCanvas() {
       innerRings.push(ring);
     }
 
-    const particleCount = 75;
+    const particleCount = 70;
     const particles = [];
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -133,9 +143,11 @@ function Hero3DCanvas() {
 
       ctx.clearRect(0, 0, width, height);
 
-      const centerX = width * 0.65;
-      const centerY = height * 0.5;
-      const baseScale = Math.min(width, height) * 0.32;
+      // Adaptive positioning: on mobile screens (< 768px), center the mesh in the background
+      const isMobile = width < 768;
+      const centerX = isMobile ? width * 0.5 : width * 0.65;
+      const centerY = isMobile ? height * 0.42 : height * 0.5;
+      const baseScale = Math.min(width, height) * (isMobile ? 0.36 : 0.32);
       const camDist = 3.6;
 
       const cosY = Math.cos(rotY);
@@ -239,6 +251,7 @@ function Hero3DCanvas() {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       observer.disconnect();
     };
   }, [wireframeMode]);
@@ -252,6 +265,7 @@ function Hero3DCanvas() {
           className={`viewportModeBtn ${wireframeMode === 'cyan' ? 'active' : ''}`}
           onClick={() => setWireframeMode('cyan')}
           title="Cyan Wireframe"
+          aria-label="Cyan 3D Wireframe"
         >
           Cyan
         </button>
@@ -259,6 +273,7 @@ function Hero3DCanvas() {
           className={`viewportModeBtn ${wireframeMode === 'amber' ? 'active' : ''}`}
           onClick={() => setWireframeMode('amber')}
           title="Amber Wireframe"
+          aria-label="Amber 3D Wireframe"
         >
           Amber
         </button>
@@ -266,12 +281,13 @@ function Hero3DCanvas() {
           className={`viewportModeBtn ${wireframeMode === 'emerald' ? 'active' : ''}`}
           onClick={() => setWireframeMode('emerald')}
           title="Emerald Wireframe"
+          aria-label="Emerald 3D Wireframe"
         >
           Emerald
         </button>
       </div>
       <div className="viewportHint">
-        <span>Interactive 3D Mesh • Drag cursor to orbit camera</span>
+        <span>Interactive 3D Mesh • Orbit camera</span>
       </div>
     </div>
   );

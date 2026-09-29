@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, ArrowRight, Mail, Check, Sparkles, ChevronDown } from 'lucide-react';
+import { Download, ArrowRight, Mail, Check, Sparkles, ChevronDown, Briefcase } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Hero3DCanvas from './3d/Hero3DCanvas';
 import { PORTFOLIO_INFO } from '../data/portfolioData';
@@ -23,10 +23,10 @@ function Hero() {
       <div className="heroVignette" aria-hidden="true"></div>
 
       <div className="heroForeground">
-        {/* Availability Badge */}
+        {/* Availability / Current Role Badge */}
         <div className="heroBadge">
           <span className="pulseGreen" aria-hidden="true"></span>
-          <span>Available for Full Stack Developer Roles</span>
+          <span>Web Developer @ WARX Digital Pvt Ltd • Building ERP, E-Commerce & AI Agents</span>
         </div>
 
         <h1 className="heroNameTitle">
@@ -51,8 +51,8 @@ function Hero() {
             <span>Download Resume</span>
           </a>
 
-          <a href="#projects" className="btn secondary">
-            <span>View Projects</span>
+          <a href="#experience" className="btn secondary">
+            <span>Work Experience</span>
             <ArrowRight size={18} aria-hidden="true" />
           </a>
 
@@ -104,7 +104,11 @@ function Hero() {
         <div className="pipelineTicker" aria-label="Core Tech Stack">
           <span className="tickerLabel">CORE STACK:</span>
           <div className="tickerItems">
+            <span>CodeIgniter 3 (CI3)</span>
+            <span className="tickerDivider">•</span>
             <span>React.js</span>
+            <span className="tickerDivider">•</span>
+            <span>AI Agents</span>
             <span className="tickerDivider">•</span>
             <span>Python Flask</span>
             <span className="tickerDivider">•</span>
@@ -112,11 +116,11 @@ function Hero() {
             <span className="tickerDivider">•</span>
             <span>MySQL</span>
             <span className="tickerDivider">•</span>
-            <span>RESTful APIs</span>
+            <span>ERP Systems</span>
             <span className="tickerDivider">•</span>
-            <span>JWT & OAuth 2.0</span>
+            <span>E-Commerce</span>
             <span className="tickerDivider">•</span>
-            <span>Git & Postman</span>
+            <span>REST APIs</span>
           </div>
         </div>
       </div>
