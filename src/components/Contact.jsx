@@ -1,213 +1,301 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Copy, Check, Send } from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { PORTFOLIO_INFO } from '../data/portfolioData';
+import {
+  Mail,
+  Send,
+  Download,
+  Copy,
+  Check,
+  MessageSquare,
+  Sparkles
+} from 'lucide-react';
+import { FaArtstation, FaBehance, FaInstagram, FaDiscord, FaYoutube, FaLinkedin } from 'react-icons/fa';
 
 function Contact() {
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
-
+  const [downloadingRateSheet, setDownloadingRateSheet] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
-    message: '',
+    projectCategory: 'Character Design',
+    pipeline: 'Unreal Engine 5',
+    budget: '$2,000 - $5,000',
+    timeline: '1 - 2 Months',
+    message: ''
   });
 
-  const email = 'rnprkshv@gmail.com';
-  const phone = '+91 9597477183';
-
-  const copyToClipboard = (text, type) => {
-    navigator.clipboard.writeText(text).then(() => {
-      if (type === 'email') {
-        setCopiedEmail(true);
-        setTimeout(() => setCopiedEmail(false), 2200);
-      } else {
-        setCopiedPhone(true);
-        setTimeout(() => setCopiedPhone(false), 2200);
-      }
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(PORTFOLIO_INFO.email).then(() => {
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2200);
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleDownloadRateSheet = () => {
+    setDownloadingRateSheet(true);
+    setTimeout(() => {
+      setDownloadingRateSheet(false);
+      alert('Downloading 2026 3D Commission Rate Sheet & Services Overview (PDF)');
+    }, 1200);
+  };
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    const mailtoSubject = encodeURIComponent(
-      formData.subject || `Inquiry from ${formData.name || 'Portfolio Visitor'}`
-    );
-    const mailtoBody = encodeURIComponent(
-      `Hi Arun,\n\n${formData.message}\n\nFrom: ${formData.name}\nEmail: ${formData.email}`
-    );
-    window.location.href = `mailto:${email}?subject=${mailtoSubject}&body=${mailtoBody}`;
+    setFormSubmitted(true);
+    setTimeout(() => setFormSubmitted(false), 4000);
   };
 
   return (
-    <section id="contact" className="section" aria-label="Contact Arun Prakash V">
-      <div className="sectionTitle">
-        <p>Get in Touch</p>
-        <h2>Let's Build Something Together</h2>
+    <section id="contact" className="section contactSection" aria-label="Contact and Commission Inquiries">
+      <div className="sectionHeader">
+        <div className="sectionTag">
+          <MessageSquare size={14} aria-hidden="true" />
+          <span>COMMISSIONS & INQUIRIES</span>
+        </div>
+        <h2 className="sectionTitle">Let's Bring Your Vision to Life in 3D</h2>
+        <p className="sectionSubtitle">
+          Available for commercial 3D production, game asset pipelines, environment worldbuilding, and cinematic look-development.
+        </p>
       </div>
 
-      <div className="contactWrapper">
-        {/* Contact Info Card */}
-        <div className="contactInfoCard">
-          <div className="contactStatus">
-            <span className="contactStatusDot" aria-hidden="true"></span>
-            <div>
-              <strong>Open for Opportunities</strong>
-              <p>Full-time Full Stack, Frontend or Backend Developer roles</p>
+      <div className="contactGridContainer">
+        <div className="contactSidebarCard revealOnScroll">
+          <div className="commissionStatusCard">
+            <div className="statusHeader">
+              <span className="beaconDot" aria-hidden="true"></span>
+              <span className="statusLabel">CURRENT STATUS</span>
             </div>
+            <h3 className="statusTitle">{PORTFOLIO_INFO.commissionStatus}</h3>
+            <p className="statusDescription">
+              Accepting bookings for commercial look-development, AAA character sculpts, and real-time Unreal Engine 5 projects.
+            </p>
           </div>
 
-          <div className="contactList">
-            {/* Email Item */}
-            <div className="contactItem">
-              <div className="contactIconWrap" aria-hidden="true">
-                <Mail size={20} />
-              </div>
-              <div className="contactDetail">
-                <span className="contactLabel">Email</span>
-                <a href={`mailto:${email}`} className="contactValue">
-                  {email}
-                </a>
-              </div>
+          <div className="directContactCard">
+            <h4>Direct Studio Email</h4>
+            <div className="emailCopyBox">
+              <span className="emailAddress">{PORTFOLIO_INFO.email}</span>
               <button
-                type="button"
-                onClick={() => copyToClipboard(email, 'email')}
+                onClick={handleCopyEmail}
                 className="copyBtn"
+                title="Copy email to clipboard"
                 aria-label="Copy email address"
-                title="Copy to clipboard"
               >
-                {copiedEmail ? <Check size={16} className="text-cyan" /> : <Copy size={16} />}
+                {copiedEmail ? <Check size={16} /> : <Copy size={16} />}
+                <span>{copiedEmail ? 'Copied!' : 'Copy'}</span>
               </button>
-            </div>
-
-            {/* Phone Item */}
-            <div className="contactItem">
-              <div className="contactIconWrap" aria-hidden="true">
-                <Phone size={20} />
-              </div>
-              <div className="contactDetail">
-                <span className="contactLabel">Phone</span>
-                <a href="tel:+919597477183" className="contactValue">
-                  {phone}
-                </a>
-              </div>
-              <button
-                type="button"
-                onClick={() => copyToClipboard(phone, 'phone')}
-                className="copyBtn"
-                aria-label="Copy phone number"
-                title="Copy to clipboard"
-              >
-                {copiedPhone ? <Check size={16} className="text-cyan" /> : <Copy size={16} />}
-              </button>
-            </div>
-
-            {/* Location Item */}
-            <div className="contactItem">
-              <div className="contactIconWrap" aria-hidden="true">
-                <MapPin size={20} />
-              </div>
-              <div className="contactDetail">
-                <span className="contactLabel">Location</span>
-                <span className="contactValue">Aruppukottai, Tamil Nadu, India</span>
-              </div>
             </div>
           </div>
 
-          <div className="contactSocials">
-            <span className="socialsPrompt">Connect directly:</span>
-            <div className="socialLinksRow">
+          <div className="rateSheetCard">
+            <div className="rateSheetInfo">
+              <h4>2026 Commercial Rate Sheet</h4>
+              <p>Transparent pricing guidelines for modeling, texturing, rigging, and turnkey 3D animations.</p>
+            </div>
+            <button
+              onClick={handleDownloadRateSheet}
+              className="btn secondary rateSheetBtn"
+              disabled={downloadingRateSheet}
+              aria-label="Download 3D rate sheet"
+            >
+              <Download size={16} aria-hidden="true" />
+              <span>{downloadingRateSheet ? 'Preparing PDF...' : 'Download Rate Sheet (PDF)'}</span>
+            </button>
+          </div>
+
+          <div className="socialNetworksCard">
+            <h4>Artist Networks & Community</h4>
+            <div className="socialIconsGrid">
               <a
-                href="https://github.com/rn-prksh"
+                href={PORTFOLIO_INFO.socials.artstation}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contactSocialLink"
-                aria-label="GitHub profile of Arun Prakash V"
+                className="socialLinkItem"
+                title="ArtStation Portfolio"
               >
-                <FaGithub size={20} />
-                <span>GitHub</span>
+                <FaArtstation size={20} />
+                <span>ArtStation</span>
               </a>
               <a
-                href="https://www.linkedin.com/in/arun-prakash-v"
+                href={PORTFOLIO_INFO.socials.behance}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="contactSocialLink"
-                aria-label="LinkedIn profile of Arun Prakash V"
+                className="socialLinkItem"
+                title="Behance Case Studies"
+              >
+                <FaBehance size={20} />
+                <span>Behance</span>
+              </a>
+              <a
+                href={PORTFOLIO_INFO.socials.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="socialLinkItem"
+                title="Instagram Renders & WIPs"
+              >
+                <FaInstagram size={20} />
+                <span>Instagram</span>
+              </a>
+              <a
+                href={PORTFOLIO_INFO.socials.discord}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="socialLinkItem"
+                title="Discord Community"
+              >
+                <FaDiscord size={20} />
+                <span>Discord</span>
+              </a>
+              <a
+                href={PORTFOLIO_INFO.socials.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="socialLinkItem"
+                title="YouTube Breakdown Tutorials"
+              >
+                <FaYoutube size={20} />
+                <span>YouTube</span>
+              </a>
+              <a
+                href={PORTFOLIO_INFO.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="socialLinkItem"
+                title="LinkedIn Profile"
               >
                 <FaLinkedin size={20} />
                 <span>LinkedIn</span>
-              </a>
-              <a
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=rnprkshv@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="contactSocialLink"
-                aria-label="Open in Gmail Webmail"
-              >
-                <Mail size={18} />
-                <span>Gmail</span>
               </a>
             </div>
           </div>
         </div>
 
-        {/* Quick Message Form */}
-        <form className="contactForm" onSubmit={handleSubmit} aria-label="Send direct message">
-          <h3 className="formTitle">Send a Quick Message</h3>
-          <p className="formSubtitle">Have a role, project, or question? Send me a note directly.</p>
-
-          <div className="formGroup">
-            <label htmlFor="name">Your Name</label>
-            <input
-              id="name"
-              type="text"
-              required
-              placeholder="e.g. John Doe / Tech Recruiter"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            />
+        <div className="contactFormCard revealOnScroll">
+          <div className="formHeader">
+            <Sparkles size={18} aria-hidden="true" />
+            <h3>Submit a Project Inquiry</h3>
           </div>
+          <p className="formIntro">
+            Fill in the details below to receive a custom production timeline and estimate within 24 hours.
+          </p>
 
-          <div className="formGroup">
-            <label htmlFor="email">Your Email</label>
-            <input
-              id="email"
-              type="email"
-              required
-              placeholder="e.g. recruiter@company.com"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            />
-          </div>
+          {formSubmitted ? (
+            <div className="formSuccessState">
+              <div className="successIconBox">
+                <Check size={32} />
+              </div>
+              <h4>Inquiry Received!</h4>
+              <p>
+                Thank you for reaching out. I have received your 3D project parameters and will respond with a tailored proposal and availability schedule within 24 hours.
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleFormSubmit} className="inquiryForm">
+              <div className="formRow">
+                <div className="formGroup">
+                  <label htmlFor="inquiry-name">Your Name / Studio *</label>
+                  <input
+                    type="text"
+                    id="inquiry-name"
+                    required
+                    placeholder="e.g. Alex Morgan / Pixel Forge Studios"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </div>
+                <div className="formGroup">
+                  <label htmlFor="inquiry-email">Work Email *</label>
+                  <input
+                    type="email"
+                    id="inquiry-email"
+                    required
+                    placeholder="alex@pixelforge.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+              </div>
 
-          <div className="formGroup">
-            <label htmlFor="subject">Subject</label>
-            <input
-              id="subject"
-              type="text"
-              placeholder="Job Opportunity / Project Collaboration"
-              value={formData.subject}
-              onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-            />
-          </div>
+              <div className="formRow">
+                <div className="formGroup">
+                  <label htmlFor="inquiry-category">Project Category</label>
+                  <select
+                    id="inquiry-category"
+                    value={formData.projectCategory}
+                    onChange={(e) => setFormData({ ...formData, projectCategory: e.target.value })}
+                  >
+                    <option value="Character Design">Character Design & Sculpting</option>
+                    <option value="Environment Art">Environment Art & Modular Sets</option>
+                    <option value="Product Visualization">Commercial Product Visualization</option>
+                    <option value="Motion Graphics">CGI Motion Graphics & Title Design</option>
+                    <option value="Game Assets">Game-Ready Assets & Rigging</option>
+                    <option value="Turnkey CGI Animation">Full Turnkey CGI Animation</option>
+                  </select>
+                </div>
+                <div className="formGroup">
+                  <label htmlFor="inquiry-pipeline">Target Engine / Software</label>
+                  <select
+                    id="inquiry-pipeline"
+                    value={formData.pipeline}
+                    onChange={(e) => setFormData({ ...formData, pipeline: e.target.value })}
+                  >
+                    <option value="Unreal Engine 5">Unreal Engine 5 (Lumen / Nanite)</option>
+                    <option value="Blender Cycles">Blender Cycles (Raytraced)</option>
+                    <option value="Octane / Redshift">Octane / Redshift Render</option>
+                    <option value="Unity">Unity Universal Render Pipeline</option>
+                    <option value="Pre-rendered Video">Pre-rendered ProRes / EXR</option>
+                  </select>
+                </div>
+              </div>
 
-          <div className="formGroup">
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              rows={4}
-              required
-              placeholder="Tell me about the role or project..."
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            />
-          </div>
+              <div className="formRow">
+                <div className="formGroup">
+                  <label htmlFor="inquiry-budget">Estimated Budget</label>
+                  <select
+                    id="inquiry-budget"
+                    value={formData.budget}
+                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                  >
+                    <option value="Under $2,000">Under $2,000</option>
+                    <option value="$2,000 - $5,000">$2,000 - $5,000</option>
+                    <option value="$5,000 - $10,000">$5,000 - $10,000</option>
+                    <option value="$10,000+">$10,000+ (Comprehensive Pipeline)</option>
+                  </select>
+                </div>
+                <div className="formGroup">
+                  <label htmlFor="inquiry-timeline">Target Delivery</label>
+                  <select
+                    id="inquiry-timeline"
+                    value={formData.timeline}
+                    onChange={(e) => setFormData({ ...formData, timeline: e.target.value })}
+                  >
+                    <option value="Urgent (< 2 Weeks)">Urgent (&lt; 2 Weeks)</option>
+                    <option value="1 - 2 Months">1 - 2 Months</option>
+                    <option value="3+ Months">3+ Months / Ongoing Contract</option>
+                  </select>
+                </div>
+              </div>
 
-          <button type="submit" className="btn primary fullWidth">
-            <Send size={18} aria-hidden="true" />
-            <span>Send Email Message</span>
-          </button>
-        </form>
+              <div className="formGroup">
+                <label htmlFor="inquiry-message">Project Description & Specifications *</label>
+                <textarea
+                  id="inquiry-message"
+                  required
+                  rows={5}
+                  placeholder="Describe your 3D asset requirements, polycount targets, moodboard links, or reference files..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                ></textarea>
+              </div>
+
+              <button type="submit" className="btn primary submitInquiryBtn">
+                <Send size={18} aria-hidden="true" />
+                <span>Transmit Project Brief</span>
+              </button>
+            </form>
+          )}
+        </div>
       </div>
     </section>
   );

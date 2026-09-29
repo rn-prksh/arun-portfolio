@@ -1,112 +1,71 @@
 import { useState } from 'react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { Download, ArrowRight, Mail, Check } from 'lucide-react';
+import { Play, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
+import Hero3DCanvas from './3d/Hero3DCanvas';
+import { PORTFOLIO_INFO } from '../data/portfolioData';
 
-function Hero() {
-  const [copied, setCopied] = useState(false);
-  const email = 'rnprkshv@gmail.com';
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2200);
-    });
-  };
-
+function Hero({ onOpenShowreel }) {
   return (
-    <section id="home" className="hero section" aria-label="Introduction">
-      <div className="heroContent">
-        <div className="badge">
-          <span className="badgePulse" aria-hidden="true"></span>
-          <span>Available for Full Stack Developer Roles</span>
+    <section id="home" className="heroSection" aria-label="Introduction">
+      <Hero3DCanvas />
+
+      <div className="heroVignette" aria-hidden="true"></div>
+
+      <div className="heroForeground">
+        <div className="heroBadge">
+          <Sparkles size={14} className="sparkleIcon" aria-hidden="true" />
+          <span>Real-Time Cinematics • Hard-Surface • Organic Sculpting</span>
         </div>
 
-        <h1 className="heroTitle">
-          Hi, I am <span className="highlightText">Arun Prakash V</span>
+        <h1 className="heroNameTitle">
+          <span className="heroPretitle">PORTFOLIO OF</span>
+          <span className="heroMainName">{PORTFOLIO_INFO.name}</span>
+          <span className="heroRoleHighlight">{PORTFOLIO_INFO.title}</span>
         </h1>
-        <h2 className="heroSubtitle">Full Stack Developer</h2>
 
-        <p className="heroText">
-          Motivated Full Stack Developer with hands-on experience in <strong>React.js</strong>,{' '}
-          <strong>Flask</strong>, <strong>Laravel</strong>, and <strong>MySQL</strong>. Passionate
-          about engineering scalable web applications, architecting robust REST APIs, and solving
-          real-world business problems.
+        <p className="heroDescription">
+          {PORTFOLIO_INFO.tagline}. Specializing in photorealistic look-development, game-ready topology, and dynamic visual storytelling.
         </p>
 
-        <div className="heroButtons">
-          <a
-            href="/resume/Arun_Prakash_bsc_Resume.pdf"
-            className="btn primary"
-            download
-            aria-label="Download Arun Prakash V Resume in PDF format"
-          >
-            <Download size={18} aria-hidden="true" />
-            <span>Download Resume</span>
-          </a>
-          <a href="#projects" className="btn secondary">
-            <span>View Projects</span>
+        <div className="heroCtaGroup">
+          <a href="#projects" className="btn primary glowEffect">
+            <span>Explore 3D Work</span>
             <ArrowRight size={18} aria-hidden="true" />
           </a>
+
+          <button
+            onClick={onOpenShowreel}
+            className="btn secondary reelCtaBtn"
+            aria-label="Play 2026 Showreel video"
+          >
+            <div className="playPulseIcon" aria-hidden="true">
+              <Play size={16} fill="currentColor" />
+            </div>
+            <span>Watch 2026 Showreel</span>
+          </button>
         </div>
 
-        <div className="heroActions">
-          <div className="quickEmail">
-            <button
-              onClick={handleCopyEmail}
-              className="copyEmailBtn"
-              title="Click to copy email address"
-              aria-label="Copy email address to clipboard"
-            >
-              <Mail size={16} aria-hidden="true" />
-              <span className="emailText">{email}</span>
-              {copied ? (
-                <span className="copyFeedback success">
-                  <Check size={14} aria-hidden="true" /> Copied!
-                </span>
-              ) : (
-                <span className="copyFeedback">Copy</span>
-              )}
-            </button>
-          </div>
-
-          <div className="socials" aria-label="Social media profiles">
-            <a
-              href="https://github.com/rn-prksh"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Arun Prakash V on GitHub (opens in new tab)"
-            >
-              <FaGithub size={22} aria-hidden="true" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/arun-prakash-v"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Arun Prakash V on LinkedIn (opens in new tab)"
-            >
-              <FaLinkedin size={22} aria-hidden="true" />
-            </a>
+        <div className="pipelineTicker" aria-label="Core 3D software pipeline">
+          <span className="tickerLabel">CORE PIPELINE:</span>
+          <div className="tickerItems">
+            <span>Blender 4.x</span>
+            <span className="tickerDivider">•</span>
+            <span>Unreal Engine 5 (Lumen/Nanite)</span>
+            <span className="tickerDivider">•</span>
+            <span>ZBrush 2025</span>
+            <span className="tickerDivider">•</span>
+            <span>Substance 3D Painter</span>
+            <span className="tickerDivider">•</span>
+            <span>Cinema 4D & Octane</span>
+            <span className="tickerDivider">•</span>
+            <span>Houdini FX</span>
           </div>
         </div>
       </div>
 
-      <div className="heroImageContainer">
-        <div className="heroImageGlow" aria-hidden="true"></div>
-        <div className="heroImageFrame">
-          <picture>
-            <source srcSet="/images/profile.webp" type="image/webp" />
-            <img
-              src="/images/profile.png"
-              alt="Arun Prakash V - Full Stack Developer"
-              width="290"
-              height="290"
-              fetchpriority="high"
-              decoding="async"
-              className="avatarImg"
-            />
-          </picture>
-        </div>
-      </div>
+      <a href="#projects" className="heroScrollIndicator" aria-label="Scroll down to projects">
+        <span className="scrollText">SCROLL</span>
+        <ChevronDown size={18} className="scrollChevron" aria-hidden="true" />
+      </a>
     </section>
   );
 }
