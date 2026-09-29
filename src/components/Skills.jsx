@@ -1,49 +1,74 @@
+import {
+  Code2,
+  Server,
+  Database,
+  ShieldCheck,
+  Wrench,
+  Terminal,
+} from 'lucide-react';
+
 const skillGroups = [
   {
-    title: 'Frontend',
-    skills: ['HTML5', 'CSS3', 'JavaScript ES6', 'React.js']
+    title: 'Frontend Development',
+    icon: Code2,
+    skills: ['React.js', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Responsive Design', 'Vite'],
   },
   {
-    title: 'Backend',
-    skills: ['Flask', 'PHP', 'Laravel', 'Node.js', 'Express.js']
+    title: 'Backend Engineering',
+    icon: Server,
+    skills: ['Python (Flask)', 'PHP (Laravel)', 'Node.js', 'Express.js', 'REST APIs', 'MVC Architecture'],
   },
   {
-    title: 'Database',
-    skills: ['MySQL']
+    title: 'Database & Storage',
+    icon: Database,
+    skills: ['MySQL', 'Relational Schema Design', 'Query Optimization', 'CRUD Operations'],
   },
   {
-    title: 'Authentication',
-    skills: ['JWT Authentication', 'OAuth 2.0', 'Firebase Authentication']
+    title: 'Auth & Security',
+    icon: ShieldCheck,
+    skills: ['JWT Authentication', 'OAuth 2.0 (Google, Zoho)', 'Firebase Auth', 'Role-Based Access Control'],
   },
   {
-    title: 'Tools',
-    skills: ['Git', 'GitHub', 'Postman', 'Bruno']
+    title: 'Developer Tools',
+    icon: Wrench,
+    skills: ['Git', 'GitHub', 'Postman', 'Bruno API Client', 'VS Code', 'npm / Vite'],
   },
   {
-    title: 'Languages',
-    skills: ['Python', 'C', 'Java']
-  }
+    title: 'Programming Languages',
+    icon: Terminal,
+    skills: ['Python', 'JavaScript', 'PHP', 'C', 'Java', 'SQL'],
+  },
 ];
 
 function Skills() {
   return (
-    <section id="skills" className="section">
+    <section id="skills" className="section" aria-label="Technical Skills">
       <div className="sectionTitle">
-        <p>Skills</p>
-        <h2>Technical Skills</h2>
+        <p>Technical Expertise</p>
+        <h2>Skills & Technologies</h2>
       </div>
 
       <div className="skillsGrid">
-        {skillGroups.map((group) => (
-          <div className="skillCard" key={group.title}>
-            <h3>{group.title}</h3>
-            <div className="skillTags">
-              {group.skills.map((skill) => (
-                <span key={skill}>{skill}</span>
-              ))}
+        {skillGroups.map((group) => {
+          const Icon = group.icon;
+          return (
+            <div className="skillCard" key={group.title}>
+              <div className="skillCardHeader">
+                <div className="skillIconWrap" aria-hidden="true">
+                  <Icon size={20} />
+                </div>
+                <h3>{group.title}</h3>
+              </div>
+              <div className="skillTags">
+                {group.skills.map((skill) => (
+                  <span className="skillTag" key={skill}>
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
